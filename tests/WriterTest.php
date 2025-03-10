@@ -1,8 +1,9 @@
 <?php
+
 namespace Wilgucki\PhpCsv\Tests;
 
-use Wilgucki\PhpCsv\Writer;
 use PHPUnit\Framework\TestCase;
+use Wilgucki\PhpCsv\Writer;
 
 class WriterTest extends TestCase
 {
@@ -10,18 +11,19 @@ class WriterTest extends TestCase
      * @var string
      */
     protected $filepath;
+
     /**
      * @var Writer
      */
     protected $writer;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->filepath = tempnam(sys_get_temp_dir(), md5(uniqid().time()));
-        $this->writer = new Writer();
+        $this->writer = new Writer;
     }
 
-    public function tearDown()
+    protected function tearDown()
     {
         if (file_exists($this->filepath)) {
             unlink($this->filepath);
@@ -29,24 +31,24 @@ class WriterTest extends TestCase
         $this->writer->close();
     }
 
-    public function testCreate()
+    public function test_create()
     {
         $csv = $this->writer->create($this->filepath);
         static::assertTrue($csv instanceof Writer);
     }
 
-    public function testWriteLine()
+    public function test_write_line()
     {
         $this->writer->create($this->filepath);
         $result = $this->writer->writeLine(['aaa', 'bbb', 'ccc']);
         static::assertTrue(is_int($result));
     }
 
-    public function testWriteAll()
+    public function test_write_all()
     {
         $data = [
             ['aaa', 'bbb', 'ccc'],
-            [111, 222, 333]
+            [111, 222, 333],
         ];
         $this->writer->create($this->filepath);
         $this->writer->writeAll($data);
@@ -55,11 +57,11 @@ class WriterTest extends TestCase
         static::assertContains('111,222,333', $savedData);
     }
 
-    public function testFlush()
+    public function test_flush()
     {
         $data = [
             ['aaa', 'bbb', 'ccc'],
-            [111, 222, 333]
+            [111, 222, 333],
         ];
         $this->writer->create($this->filepath);
         $this->writer->writeAll($data);

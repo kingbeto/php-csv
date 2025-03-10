@@ -1,4 +1,5 @@
 <?php
+
 namespace Wilgucki\PhpCsv\Converters;
 
 interface ConverterInterface

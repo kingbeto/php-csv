@@ -1,4 +1,5 @@
 <?php
+
 namespace Wilgucki\PhpCsv;
 
 use Wilgucki\PhpCsv\Converters\ConverterInterface;
@@ -8,22 +9,22 @@ use Wilgucki\PhpCsv\Exceptions\ReaderException;
 /**
  * CSV Reader class. Object oriented way of reading CSV files.
  *
- * @package Wilgucki\PhpCsv
  * @author Maciej Wilgucki <mwilgucki@gmail.com>
  * @license https://github.com/kingbeto/php-csv/blob/master/LICENSE
+ *
  * @link https://github.com/kingbeto/php-csv
  */
 class Reader extends AbstractCsv
 {
     private $withHeader = false;
+
     private $header = [];
+
     private $converters = [];
 
     /**
      * Assigns converter to the specified column
      *
-     * @param int $columnNo
-     * @param ConverterInterface $converter
      * @throws ReaderException
      */
     public function addConverter(int $columnNo, ConverterInterface $converter)
@@ -37,18 +38,20 @@ class Reader extends AbstractCsv
     /**
      * Open CSV file for reading
      *
-     * @param string $file File name with path to open
-     * @param string $mode @link http://php.net/manual/en/function.fopen.php
+     * @param  string  $file  File name with path to open
+     * @param  string  $mode  @link http://php.net/manual/en/function.fopen.php
      * @return $this
+     *
      * @throws FileException
      */
     public function open($file, $mode = 'r+')
     {
-        if (!file_exists($file)) {
+        if (! file_exists($file)) {
             throw new FileException('CSV file does not exist');
         }
 
         parent::open($file, $mode);
+
         return $this;
     }
 
@@ -63,6 +66,7 @@ class Reader extends AbstractCsv
         if (ftell($this->handle) == 0) {
             $this->header = $this->read();
         }
+
         return $this->header;
     }
 
@@ -91,6 +95,7 @@ class Reader extends AbstractCsv
         if ($this->withHeader && is_array($out)) {
             $out = array_combine($this->header, $out);
         }
+
         return $out;
     }
 
@@ -105,6 +110,7 @@ class Reader extends AbstractCsv
         while (($row = $this->readLine()) !== false) {
             $out[] = $row;
         }
+
         return $out;
     }
 
@@ -117,7 +123,7 @@ class Reader extends AbstractCsv
     {
         $out = fgetcsv($this->handle, null, $this->delimiter, $this->enclosure);
 
-        if (!is_array($out)) {
+        if (! is_array($out)) {
             return $out;
         }
 

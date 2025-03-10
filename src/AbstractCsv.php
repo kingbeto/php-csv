@@ -1,25 +1,30 @@
 <?php
+
 namespace Wilgucki\PhpCsv;
 
 /**
  * Class AbstractCsv
- * @package Wilgucki\PhpCsv
  */
 abstract class AbstractCsv
 {
     protected $delimiter;
+
     protected $enclosure;
+
     protected $escape;
+
     protected $encodingFrom = null;
+
     protected $encodingTo = null;
+
     protected $handle = null;
 
     /**
-     * @param string $delimiter @link http://php.net/manual/en/function.fgetcsv.php
-     * @param string $enclosure @link http://php.net/manual/en/function.fgetcsv.php
-     * @param string $escape @link http://php.net/manual/en/function.fgetcsv.php
-     * @param string|null $encodingFrom Input encoding
-     * @param string|null $encodingTo Output encoding
+     * @param  string  $delimiter  @link http://php.net/manual/en/function.fgetcsv.php
+     * @param  string  $enclosure  @link http://php.net/manual/en/function.fgetcsv.php
+     * @param  string  $escape  @link http://php.net/manual/en/function.fgetcsv.php
+     * @param  string|null  $encodingFrom  Input encoding
+     * @param  string|null  $encodingTo  Output encoding
      */
     public function __construct(
         $delimiter = ',',
@@ -38,8 +43,8 @@ abstract class AbstractCsv
     /**
      * Open CSV file
      *
-     * @param string $file File name with path to open
-     * @param string $mode @link http://php.net/manual/en/function.fopen.php
+     * @param  string  $file  File name with path to open
+     * @param  string  $mode  @link http://php.net/manual/en/function.fopen.php
      */
     public function open($file, $mode)
     {

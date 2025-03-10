@@ -1,5 +1,5 @@
 <?php
+
 namespace Wilgucki\PhpCsv\Exceptions;
 
-class ReaderException extends \Exception
-{}
+class ReaderException extends \Exception {}
