@@ -1,0 +1,40 @@
+# Composer dependencies
+/vendor/
+composer.phar
+
+# PHPUnit
+.phpunit.result.cache
+.phpunit.cache/
+
+# IDE specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# Environment files
+.env
+.env.backup
+*.env.local
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Build files
+build/
+dist/
+
+# Cache files
+*.cache 
