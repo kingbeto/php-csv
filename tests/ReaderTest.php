@@ -3,6 +3,7 @@
 namespace Wilgucki\PhpCsv\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Wilgucki\PhpCsv\Exceptions\FileException;
 use Wilgucki\PhpCsv\Reader;
 
 class ReaderTest extends TestCase
@@ -17,7 +18,7 @@ class ReaderTest extends TestCase
      */
     protected $reader;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $dir = __DIR__; // xdebug issue workaround
         $this->filepath = $dir.'/assets/test1.csv';
@@ -30,11 +31,10 @@ class ReaderTest extends TestCase
         static::assertTrue($csv instanceof Reader);
     }
 
-    /**
-     * @expectedException \Wilgucki\PhpCsv\Exceptions\FileException
-     */
     public function testOpenNonExistingFile()
     {
+        $this->expectException(FileException::class);
+
         $filepath = md5(uniqid().microtime()).'.csv';
         $reader = new Reader;
         $reader->open($filepath);

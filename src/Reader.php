@@ -16,18 +16,19 @@ use Wilgucki\PhpCsv\Exceptions\ReaderException;
  */
 class Reader extends AbstractCsv
 {
-    private $withHeader = false;
+    private bool $withHeader = false;
 
-    private $header = [];
+    private array $header = [];
 
-    private $converters = [];
+    /** @var array<int, ConverterInterface> */
+    private array $converters = [];
 
     /**
      * Assigns converter to the specified column
      *
      * @throws ReaderException
      */
-    public function addConverter(int $columnNo, ConverterInterface $converter)
+    public function addConverter(int $columnNo, ConverterInterface $converter): void
     {
         if (isset($this->converters[$columnNo])) {
             throw new ReaderException('Converter already assigned to column '.$columnNo);
@@ -44,7 +45,7 @@ class Reader extends AbstractCsv
      *
      * @throws FileException
      */
-    public function open($file, $mode = 'r+')
+    public function open(string $file, string $mode = 'r+'): self
     {
         if (! file_exists($file)) {
             throw new FileException('CSV file does not exist');
@@ -57,10 +58,8 @@ class Reader extends AbstractCsv
 
     /**
      * Get CSV header. Usually it's the first line in file.
-     *
-     * @return array
      */
-    public function getHeader()
+    public function getHeader(): array
     {
         $this->withHeader = true;
         if (ftell($this->handle) == 0) {
@@ -72,10 +71,8 @@ class Reader extends AbstractCsv
 
     /**
      * Read current line from CSV file
-     *
-     * @return array|false
      */
-    public function readLine()
+    public function readLine(): array|false
     {
         $line = $this->read();
         if ($line === false) {
@@ -97,10 +94,8 @@ class Reader extends AbstractCsv
 
     /**
      * Read all lines from CSV file
-     *
-     * @return array
      */
-    public function readAll()
+    public function readAll(): array
     {
         $out = [];
         while (($row = $this->readLine()) !== false) {
@@ -112,12 +107,10 @@ class Reader extends AbstractCsv
 
     /**
      * Wrapper for fgetcsv function
-     *
-     * @return array|null|false
      */
-    private function read()
+    private function read(): array|false
     {
-        $out = fgetcsv($this->handle, null, $this->delimiter, $this->enclosure);
+        $out = fgetcsv($this->handle, null, $this->delimiter, $this->enclosure, $this->escape);
 
         if (! is_array($out)) {
             return $out;

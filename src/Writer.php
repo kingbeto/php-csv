@@ -12,14 +12,6 @@ namespace Wilgucki\PhpCsv;
  */
 class Writer extends AbstractCsv
 {
-    protected $handle;
-
-    protected $delimiter;
-
-    protected $enclosure;
-
-    protected $escape;
-
     /**
      * Open CSV file for writing.
      *
@@ -27,7 +19,7 @@ class Writer extends AbstractCsv
      * @param  string  $mode  @link http://php.net/manual/en/function.fopen.php
      * @return $this
      */
-    public function create($file = 'php://memory', $mode = 'w+')
+    public function create(string $file = 'php://memory', string $mode = 'w+'): self
     {
         parent::open($file, $mode);
 
@@ -36,10 +28,8 @@ class Writer extends AbstractCsv
 
     /**
      * Write line to CSV file.
-     *
-     * @return bool|int
      */
-    public function writeLine(array $row)
+    public function writeLine(array $row): bool|int
     {
         return $this->write($row);
     }
@@ -47,7 +37,7 @@ class Writer extends AbstractCsv
     /**
      * Write all lines to CSV file
      */
-    public function writeAll(array $data)
+    public function writeAll(array $data): void
     {
         foreach ($data as $row) {
             $this->writeLine($row);
@@ -56,10 +46,8 @@ class Writer extends AbstractCsv
 
     /**
      * Output all written data as string.
-     *
-     * @return string
      */
-    public function flush()
+    public function flush(): string
     {
         rewind($this->handle);
         $out = stream_get_contents($this->handle);
@@ -70,10 +58,8 @@ class Writer extends AbstractCsv
 
     /**
      * Wrapper for fputcsv function
-     *
-     * @return bool|int
      */
-    private function write(array $row)
+    private function write(array $row): bool|int
     {
         if ($this->encodingFrom !== null && $this->encodingTo !== null) {
             foreach ($row as $k => $v) {

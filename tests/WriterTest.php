@@ -17,13 +17,13 @@ class WriterTest extends TestCase
      */
     protected $writer;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->filepath = tempnam(sys_get_temp_dir(), md5(uniqid().time()));
         $this->writer = new Writer;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if (file_exists($this->filepath)) {
             unlink($this->filepath);
@@ -53,8 +53,8 @@ class WriterTest extends TestCase
         $this->writer->create($this->filepath);
         $this->writer->writeAll($data);
         $savedData = $this->writer->flush();
-        static::assertContains('aaa,bbb,ccc', $savedData);
-        static::assertContains('111,222,333', $savedData);
+        static::assertStringContainsString('aaa,bbb,ccc', $savedData);
+        static::assertStringContainsString('111,222,333', $savedData);
     }
 
     public function testFlush()

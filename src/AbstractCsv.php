@@ -7,16 +7,17 @@ namespace Wilgucki\PhpCsv;
  */
 abstract class AbstractCsv
 {
-    protected $delimiter;
+    protected string $delimiter;
 
-    protected $enclosure;
+    protected string $enclosure;
 
-    protected $escape;
+    protected string $escape;
 
-    protected $encodingFrom;
+    protected ?string $encodingFrom;
 
-    protected $encodingTo;
+    protected ?string $encodingTo;
 
+    /** @var resource|null */
     protected $handle;
 
     /**
@@ -27,11 +28,11 @@ abstract class AbstractCsv
      * @param  string|null  $encodingTo  Output encoding
      */
     public function __construct(
-        $delimiter = ',',
-        $enclosure = '"',
-        $escape = '\\',
-        $encodingFrom = null,
-        $encodingTo = null
+        string $delimiter = ',',
+        string $enclosure = '"',
+        string $escape = '\\',
+        ?string $encodingFrom = null,
+        ?string $encodingTo = null
     ) {
         $this->delimiter = $delimiter;
         $this->enclosure = $enclosure;
@@ -45,16 +46,19 @@ abstract class AbstractCsv
      *
      * @param  string  $file  File name with path to open
      * @param  string  $mode  @link http://php.net/manual/en/function.fopen.php
+     * @return $this
      */
-    public function open($file, $mode)
+    public function open(string $file, string $mode): self
     {
         $this->handle = fopen($file, $mode);
+
+        return $this;
     }
 
     /**
      * Close file pointer
      */
-    public function close()
+    public function close(): void
     {
         fclose($this->handle);
     }
