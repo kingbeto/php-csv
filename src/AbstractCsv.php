@@ -13,11 +13,11 @@ abstract class AbstractCsv
 
     protected $escape;
 
-    protected $encodingFrom = null;
+    protected $encodingFrom;
 
-    protected $encodingTo = null;
+    protected $encodingTo;
 
-    protected $handle = null;
+    protected $handle;
 
     /**
      * @param  string  $delimiter  @link http://php.net/manual/en/function.fgetcsv.php

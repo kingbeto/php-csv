@@ -85,11 +85,7 @@ class Reader extends AbstractCsv
         $out = [];
 
         foreach ($line as $columnNo => $value) {
-            if (isset($this->converters[$columnNo])) {
-                $out[$columnNo] = $this->converters[$columnNo]->convert($value);
-            } else {
-                $out[$columnNo] = $line[$columnNo];
-            }
+            $out[$columnNo] = isset($this->converters[$columnNo]) ? $this->converters[$columnNo]->convert($value) : $line[$columnNo];
         }
 
         if ($this->withHeader && is_array($out)) {

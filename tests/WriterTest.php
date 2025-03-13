@@ -31,20 +31,20 @@ class WriterTest extends TestCase
         $this->writer->close();
     }
 
-    public function test_create()
+    public function testCreate()
     {
         $csv = $this->writer->create($this->filepath);
         static::assertTrue($csv instanceof Writer);
     }
 
-    public function test_write_line()
+    public function testWriteLine()
     {
         $this->writer->create($this->filepath);
         $result = $this->writer->writeLine(['aaa', 'bbb', 'ccc']);
         static::assertTrue(is_int($result));
     }
 
-    public function test_write_all()
+    public function testWriteAll()
     {
         $data = [
             ['aaa', 'bbb', 'ccc'],
@@ -57,7 +57,7 @@ class WriterTest extends TestCase
         static::assertContains('111,222,333', $savedData);
     }
 
-    public function test_flush()
+    public function testFlush()
     {
         $data = [
             ['aaa', 'bbb', 'ccc'],

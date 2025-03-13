@@ -23,7 +23,7 @@ class ReaderTest extends TestCase
         $this->filepath = $dir.'/assets/test1.csv';
     }
 
-    public function test_open()
+    public function testOpen()
     {
         $reader = new Reader;
         $csv = $reader->open($this->filepath);
@@ -33,14 +33,14 @@ class ReaderTest extends TestCase
     /**
      * @expectedException \Wilgucki\PhpCsv\Exceptions\FileException
      */
-    public function test_open_non_existing_file()
+    public function testOpenNonExistingFile()
     {
         $filepath = md5(uniqid().microtime()).'.csv';
         $reader = new Reader;
         $reader->open($filepath);
     }
 
-    public function test_get_header()
+    public function testGetHeader()
     {
         $reader = new Reader;
         $reader->open($this->filepath);
@@ -52,7 +52,7 @@ class ReaderTest extends TestCase
         static::assertTrue(in_array('Field 3', $header));
     }
 
-    public function test_read_line()
+    public function testReadLine()
     {
         $reader = new Reader;
         $reader->open($this->filepath);
@@ -64,7 +64,7 @@ class ReaderTest extends TestCase
         static::assertCount(3, $line);
     }
 
-    public function test_read_second_line()
+    public function testReadSecondLine()
     {
         $reader = new Reader;
         $reader->open($this->filepath);
@@ -77,7 +77,7 @@ class ReaderTest extends TestCase
         static::assertCount(3, $line);
     }
 
-    public function test_read_line_with_header()
+    public function testReadLineWithHeader()
     {
         $reader = new Reader;
         $reader->open($this->filepath);
@@ -93,7 +93,7 @@ class ReaderTest extends TestCase
         static::assertCount(3, $line);
     }
 
-    public function test_read_all()
+    public function testReadAll()
     {
         $reader = new Reader;
         $reader->open($this->filepath);
@@ -105,7 +105,7 @@ class ReaderTest extends TestCase
         static::assertTrue(is_array($lines[2]));
     }
 
-    public function test_read_all_with_heder()
+    public function testReadAllWithHeder()
     {
         $reader = new Reader;
         $reader->open($this->filepath);

@@ -12,7 +12,7 @@ namespace Wilgucki\PhpCsv;
  */
 class Writer extends AbstractCsv
 {
-    protected $handle = null;
+    protected $handle;
 
     protected $delimiter;
 
@@ -49,7 +49,7 @@ class Writer extends AbstractCsv
      */
     public function writeAll(array $data)
     {
-        foreach ($data as $i => $row) {
+        foreach ($data as $row) {
             $this->writeLine($row);
         }
     }

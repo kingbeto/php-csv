@@ -10,7 +10,7 @@ use Wilgucki\PhpCsv\Reader;
 
 class DateToCarbonTest extends TestCase
 {
-    public function test_convert()
+    public function testConvert()
     {
         $dir = __DIR__;
         $filepath = realpath($dir.'/../assets/test2.csv');
@@ -23,7 +23,7 @@ class DateToCarbonTest extends TestCase
         static::assertInstanceOf(Carbon::class, $csv[0]);
     }
 
-    public function test_convert_with_header()
+    public function testConvertWithHeader()
     {
         $dir = __DIR__;
         $filepath = realpath($dir.'/../assets/test3.csv');
@@ -37,7 +37,7 @@ class DateToCarbonTest extends TestCase
         static::assertInstanceOf(Carbon::class, $csv['Field 1']);
     }
 
-    public function test_multiple_converters_on_single_column()
+    public function testMultipleConvertersOnSingleColumn()
     {
         $this->expectException(ReaderException::class);
         $this->expectExceptionMessage('Converter already assigned to column 0');
