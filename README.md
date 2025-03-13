@@ -1,7 +1,7 @@
 # PHP-CSV
 
 PHP-CSV is a package that allows you to manage CSV files in an object-oriented way.
-It is the resurrection of the wilgucki/php-csv original package.
+It is the respawn of the wilgucki/php-csv original package.
 
 ## Installation
 

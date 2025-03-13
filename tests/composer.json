@@ -1,5 +1,5 @@
 {
-  "name": "wilgucki/php-csv",
+  "name": "kingbeto/php-csv",
   "description": "Object oriented way of managing CSV files",
   "keywords": ["php", "csv"],
   "license": "MIT",
@@ -7,6 +7,10 @@
     {
       "name": "Maciej Wilgucki",
       "email": "mwilgucki@gmail.com"
+    },
+    {
+      "name": "Alberto Pardo Saleme",
+      "email": "apardo@engeni.com"
     }
   ],
   "require": {
